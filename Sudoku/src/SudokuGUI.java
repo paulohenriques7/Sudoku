@@ -119,7 +119,7 @@ public class SudokuGUI extends JFrame {
         private final int limit;
         LimitDocument(int l) { this.limit = l; }
         @Override public void insertString(int offs, String str, javax.swing.text.AttributeSet a)
-                throws javax.swing.BadLocationException {
+                throws BadLocationException {
             if (str == null) return;
             if ((getLength() + str.length()) <= limit)
                 super.insertString(offs, str, a);
@@ -128,11 +128,15 @@ public class SudokuGUI extends JFrame {
 
     /* --------------------------- main --------------------------- */
 
-    public static void main(String[] args) {
-        // Exemplo rápido se nenhum argumento for passado:
-        if (args.length == 0)
-            args = new String[] { "0,0;5,true", "1,1;7,true", "2,2;3,true" };
+public static void main(String[] args) {
+    // Exemplo rápido se nenhum argumento for passado:
+    if (args.length == 0) {
+        String[] defaultArgs = { "0,0;5,true", "1,1;7,true", "2,2;3,true" };
+        SwingUtilities.invokeLater(() -> new SudokuGUI(defaultArgs));
+    } else {
         SwingUtilities.invokeLater(() -> new SudokuGUI(args));
     }
+}
+
 }
 
